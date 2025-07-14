@@ -8,7 +8,7 @@ export class HeroPageComponent {
   age = signal(45);
 
   getHeroDescription() {
-    return `${this.name} ${this.age}`;
+    return `${this.name()} ${this.age()}`;
   }
 
   changeHero() {
@@ -21,7 +21,7 @@ export class HeroPageComponent {
   }
 
   capitalizeName() {
-    return this.name.toString().toUpperCase();
+    return this.name().toString().toUpperCase();
   }
 
   resetForm() {
