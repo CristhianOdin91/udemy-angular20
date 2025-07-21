@@ -10,9 +10,21 @@
     color: #fff;
     text-decoration: none;
   }
+
+  nav a.active {
+    color: red;
+    text-decoration: underline;
+  }
 </style>
 
 <nav>
-  <a routerLink="/">Counter</a>
-  <a [routerLink]="['/hero']">Hero</a>
+  <a
+    routerLink="/"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+  >
+    Counter
+  </a>
+  <!-- Se usan corchetes para cuando se quiera hacer una asignación de propiedades -->
+  <a [routerLink]="['/hero']" [routerLinkActive]="'active'">Hero</a>
 </nav>
