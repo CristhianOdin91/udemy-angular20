@@ -29,6 +29,11 @@ export class DragonballPageComponent {
       name: 'Picollo',
       power: 3000
     },
+    {
+      id: 3,
+      name: 'Yamcha',
+      power: 500
+    },
   ]);
 
   /*
