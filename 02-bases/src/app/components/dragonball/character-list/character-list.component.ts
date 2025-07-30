@@ -10,4 +10,6 @@ export class CharacterListComponent {
   // Con input se define que el valor de la propiedad
   // viene del mundo exterior
   characters = input.required<Character[]>();
+
+  listName = input.required<String>();
 }

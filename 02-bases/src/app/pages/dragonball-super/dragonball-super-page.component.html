@@ -3,38 +3,13 @@
 
 <section class="row">
   <div class="col-12 col-sm-6">
-    <h3>Agregar:  {{ name() }}</h3>
-
-    <!-- 
-      Se le está asignando la referencia local #txtName al input 
-      para poder sacar su valor y asignarlo a la señal
-    -->
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Nombre"
-      [value]="name()"
-      (change)="name.set(txtName.value)"
-      (input)="name.set(txtName.value)"
-      #txtName
-    >
-
-    <h4>{{ power() }}</h4>
-    <input
-      type="number"
-      class="form-control
-      mt-2"
-      placeholder="Poder"
-      [value]="power()"
-      #txtPower
-      (change)="power.set(+txtPower.value)"
-      (input)="power.set(+txtPower.value)"
-    >
-
-    <button class="mt-2 btn btn-primary" (click)="addCharacter()">Agregar</button>
+    <dragonball-character-add />
   </div>
 
   <div class="col-12 col-sm-6">
-    <dragonball-character-list [characters]="characters()" />
+    <dragonball-character-list
+      listName="Listado de personajes"
+      [characters]="characters()"
+    />
   </div>
 </section>
