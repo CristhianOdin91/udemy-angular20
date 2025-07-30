@@ -1,4 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
+
+import { Character } from '../../../interfaces/character.interface';
 
 @Component({
   selector: 'dragonball-character-add',
@@ -8,22 +10,23 @@ export class CharacterAddComponent {
   name = signal('')
   power = signal(0)
 
+  // Se recomienda que se use de esta forma
+  // no con el decorador @Output
+  newCharacter = output<Character>()
+
   addCharacter() {
     if (!this.name() || !this.power() || isNaN(this.power()) || this.power() <= 0) {
       return
     }
 
-    /*
-    this.characters.update(current => [
-      ...current,
-      {
-        id: current.length + 1,
-        name: this.name(),
-        power: this.power()
-      }
-    ])
-      */
-    console.log({ name: this.name(), power: this.power() })
+    const newCharacter: Character = {
+      id: Math.floor(Math.random() * 1000),
+      name: this.name(),
+      power: this.power()
+    }
+
+    this.newCharacter.emit(newCharacter)
+
     this.resetFields()
   }
 

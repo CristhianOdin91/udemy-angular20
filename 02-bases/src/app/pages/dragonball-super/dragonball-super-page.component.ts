@@ -14,8 +14,6 @@ import type { Character } from '../../interfaces/character.interface'
   ],
 })
 export class DragonballSuperPageComponent {
-  name = signal('')
-  power = signal(0) 
 
   characters = signal<Character[]>([
     {
@@ -30,24 +28,12 @@ export class DragonballSuperPageComponent {
     },
   ]);
 
-  addCharacter() {
-    if (!this.name() || !this.power() || isNaN(this.power()) || this.power() <= 0) {
-      return
-    }
-
+  addCharacter(newCharacter: Character) {
     this.characters.update(current => [
       ...current,
       {
-        id: current.length + 1,
-        name: this.name(),
-        power: this.power()
+        ...newCharacter
       }
     ])
-    this.resetFields()
-  }
-
-  resetFields() {
-    this.name.set('')
-    this.power.set(0)
   }
 }
