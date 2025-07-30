@@ -6,8 +6,8 @@
     <h3>Agregar:  {{ name() }}</h3>
 
     <!-- 
-      Se le está asignando la referencia #txtName al input para poder 
-      sacar su valor y asignarlo a la señal
+      Se le está asignando la referencia local #txtName al input 
+      para poder sacar su valor y asignarlo a la señal
     -->
     <input
       type="text"
@@ -25,6 +25,7 @@
       class="form-control
       mt-2"
       placeholder="Poder"
+      [value]="power()"
       #txtPower
       (change)="power.set(+txtPower.value)"
       (input)="power.set(+txtPower.value)"

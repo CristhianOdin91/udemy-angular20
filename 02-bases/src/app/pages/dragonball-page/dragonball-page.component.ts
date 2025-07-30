@@ -13,8 +13,8 @@ interface Character {
   templateUrl: './dragonball-page.component.html',
 })
 export class DragonballPageComponent {
-  name = signal('Gohan')
-  power = signal(100) 
+  name = signal('')
+  power = signal(0) 
 
   characters = signal<Character[]>([
     {
@@ -40,6 +40,10 @@ export class DragonballPageComponent {
   ]);
 
   addCharacter() {
+    if (!this.name() || !this.power() || isNaN(this.power()) || this.power() <= 0) {
+      return
+    }
+
     this.characters.update(current => [
       ...current,
       {
@@ -48,6 +52,12 @@ export class DragonballPageComponent {
         power: this.power()
       }
     ])
+    this.resetFields()
+  }
+
+  resetFields() {
+    this.name.set('')
+    this.power.set(0)
   }
 
   /*
