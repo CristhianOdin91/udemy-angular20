@@ -1,0 +1,50 @@
+import { Component, signal } from '@angular/core';
+
+interface Character {
+  id: number;
+  name: string;
+  power: number;
+}
+
+@Component({
+  selector: 'app-dragonball-super-page',
+  templateUrl: './dragonball-super-page.component.html',
+})
+export class DragonballSuperPageComponent {
+  name = signal('')
+  power = signal(0) 
+
+  characters = signal<Character[]>([
+    {
+      id: 1,
+      name: 'Goku',
+      power: 9999
+    },
+    {
+      id: 2,
+      name: 'Vegeta',
+      power: 8000
+    },
+  ]);
+
+  addCharacter() {
+    if (!this.name() || !this.power() || isNaN(this.power()) || this.power() <= 0) {
+      return
+    }
+
+    this.characters.update(current => [
+      ...current,
+      {
+        id: current.length + 1,
+        name: this.name(),
+        power: this.power()
+      }
+    ])
+    this.resetFields()
+  }
+
+  resetFields() {
+    this.name.set('')
+    this.power.set(0)
+  }
+}
