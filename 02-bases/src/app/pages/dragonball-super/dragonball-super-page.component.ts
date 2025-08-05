@@ -1,9 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { CharacterListComponent } from "../../components/dragonball/character-list/character-list.component";
 import { CharacterAddComponent } from "../../components/dragonball/character-add/character-add.component";
 
-import type { Character } from '../../interfaces/character.interface'
+import { DragonballService } from '../../services/dragonball.service';
 
 @Component({
   selector: 'app-dragonball-super-page',
@@ -14,26 +14,11 @@ import type { Character } from '../../interfaces/character.interface'
   ],
 })
 export class DragonballSuperPageComponent {
+  // La inyección de dependencias se realiza en el constructor
+  // esta sería la inyección tradicional
+  // constructor(public dragonballService: DragonballService) {}
 
-  characters = signal<Character[]>([
-    {
-      id: 1,
-      name: 'Goku',
-      power: 9999
-    },
-    {
-      id: 2,
-      name: 'Vegeta',
-      power: 8000
-    },
-  ]);
-
-  addCharacter(newCharacter: Character) {
-    this.characters.update(current => [
-      ...current,
-      {
-        ...newCharacter
-      }
-    ])
-  }
+  // Esta es la nueva inyección de dependencias
+  // sirve para tomar la instancia de la clase inclusive en funciones
+  dragonballService = inject(DragonballService)
 }
