@@ -1,23 +1,17 @@
 import { effect, Injectable, signal } from '@angular/core';
 import { Character } from '../interfaces/character.interface';
 
+const loadFromLocalStorage = (): Character[] => {
+  const characters = localStorage.getItem('characters')
+  return characters ? JSON.parse(characters) : []
+}
+
 // Con la propiedad 'providedIn' se define el scope
 // si se deja como 'root' estará disponible en toda la aplicación
 @Injectable({providedIn: 'root'})
 export class DragonballService {
 
-  characters = signal<Character[]>([
-    {
-      id: 1,
-      name: 'Goku',
-      power: 9999
-    },
-    {
-      id: 2,
-      name: 'Vegeta',
-      power: 8000
-    },
-  ]);
+  characters = signal<Character[]>(loadFromLocalStorage());
 
   // Los efectos nos van a servir para disparar una acción secundaria
   // un efecto se podría definir dentro del constructor
